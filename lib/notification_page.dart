@@ -67,7 +67,7 @@ class NotificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Page"),
+        title: const Text("Thông báo"),
         actions: [
           IconButton(onPressed: () {
             Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationCreate()),);

@@ -39,9 +39,9 @@ class NotificationItem extends StatelessWidget {
               ),
             ),
             isImportant ? 
-            Row(children: const [
+            const Row(children: [
               Icon(Icons.notification_important, color: Colors.red, size: 18,),
-              Text("Important")
+              Text("Quan trọng")
             ],)
             : const Text(""),
           ],

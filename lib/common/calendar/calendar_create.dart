@@ -2,7 +2,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter_quill/flutter_quill.dart' as quill;
 import 'package:flutter/material.dart';
 import 'package:flutter_mentions/flutter_mentions.dart';
-import 'package:demo_app/common/layout/CustomFooterBar.dart';
+import 'package:demo_app/common/layout/custom_footer_bar.dart';
 
 class CalendarCreate extends StatefulWidget {
   @override

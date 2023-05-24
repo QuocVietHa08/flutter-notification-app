@@ -1,9 +1,5 @@
-import 'package:demo_app/setting_page.dart';
 import 'package:flutter/material.dart';
-import 'login_page.dart';
-import 'calendar_page.dart';
-import 'notification_page.dart';
-import 'common/layout/CustomFooterBar.dart';
+import 'common/layout/custom_footer_bar.dart';
 
 class HomePage extends StatelessWidget {  
   @override
@@ -11,7 +7,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Notification Application"),
+        title: const Text("Ứng dụng thông báo"),
       ),
       body: const Center(
         child: Text(

@@ -53,22 +53,25 @@ class _NotificationCreateState extends State<NotificationCreate> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       print("submit -------------:");
-      setState(() {
-        _input1Controller.clear();
-        _input2Controller.clear();
-        _switchValue = false;
-        _selectedDate = null;
-        _selectedTime = null;
-        _textEditorController = quill.QuillController.basic();
-      });
     }
+  }
+
+  void _clearForm() {
+    setState(() {
+      _input1Controller.clear();
+      _input2Controller.clear();
+      _switchValue = false;
+      _selectedDate = null;
+      _selectedTime = null;
+      _textEditorController = quill.QuillController.basic();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Notification Create"),
+        title: Text("Tạo thông báo"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -79,17 +82,21 @@ class _NotificationCreateState extends State<NotificationCreate> {
               children: [
                 TextFormField(
                   controller: _input1Controller,
-                  decoration: const InputDecoration(label: Text("Title")),
+                  decoration: const InputDecoration(
+                      label: Text("Tiêu đề"), icon: Icon(Icons.send)),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter a value';
+                      return 'Xin hãy nhập tiêu đề';
                     }
 
                     return null;
                   },
                 ),
-
                 FlutterMentions(
+                  decoration: const InputDecoration(
+                    label: Text("Người tham gia"),
+                    icon: Icon(Icons.person),
+                  ),
                   mentions: [
                     Mention(
                       trigger: '#',
@@ -104,45 +111,19 @@ class _NotificationCreateState extends State<NotificationCreate> {
                     )
                   ],
                 ),
-
-                const Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: Row(
-                    // textDirection: TextDirection.RTL,
-                    verticalDirection: VerticalDirection.down,
-                    children: [
-                      Column(
-                        children: [
-                          Text("Example"),
-                          Text(""),
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Send to Relipa #Relipa"),
-                            Text("Send to specific grou MKT #MHKT"),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
                 SwitchListTile(
-                  title: const Text("Switch"),
+                  title: const Text("Thông báo cho mọi người"),
                   value: _switchValue,
                   onChanged: checkboxCallback,
                   contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
                 ),
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                  title: const Text('Date Picker'),
+                  title: const Text('Thời gian '),
                   // ignore: unnecessary_null_comparison
                   subtitle: Text(_selectedDate != null && _selectedTime != null
                       ? '${dateValueFormat.format(_selectedDate ?? DateTime.now())} ${_selectedTime!.format(context)}'
-                      : 'No date selected'),
+                      : 'Không có ngày được chọn'),
                   onTap: () {
                     showDatePicker(
                       context: context,
@@ -170,10 +151,12 @@ class _NotificationCreateState extends State<NotificationCreate> {
                   height: 16,
                 ),
                 const Text(
-                  "Content",
+                  "Nội dung",
                   style: TextStyle(fontSize: 16),
                 ),
-                quill.QuillToolbar.basic(controller: _textEditorController,),
+                quill.QuillToolbar.basic(
+                  controller: _textEditorController,
+                ),
                 Expanded(
                   child: Container(
                     child: quill.QuillEditor(
@@ -185,16 +168,29 @@ class _NotificationCreateState extends State<NotificationCreate> {
                       padding: EdgeInsets.zero,
                       focusNode: FocusNode(),
                       scrollController: ScrollController(),
-                      placeholder: "Enter your text here",
+                      placeholder: "Nhập nội dung thông báo",
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 16.0,
                 ),
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  child: const Text('Submit'),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: _submitForm,
+                        child: const Text('Tạo'),
+                      ),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                      ElevatedButton(
+                          onPressed: _clearForm, child: const Text("Clear"))
+                    ],
+                  ),
                 )
               ],
             )),

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 // import  './notification_item_detail.dart';
 
 class EventItem extends StatelessWidget {
-
   final String title;
   final String content;
   final String location;
   final String date;
+  final String time;
   final List<String> groups;
   final bool isImportant;
-  final int attenders;
-
+  final List<String> attenders;
+  final int status;
 
   const EventItem(
       {super.key,
@@ -20,10 +20,13 @@ class EventItem extends StatelessWidget {
       required this.attenders,
       required this.date,
       required this.isImportant,
-      required this.groups});
+      required this.groups,
+      required this.time,
+      required this.status});
 
   @override
   Widget build(BuildContext context) {
+    final numberOfAttenders = attenders.length;
 
     return Card(
       child: ListTile(
@@ -33,7 +36,7 @@ class EventItem extends StatelessWidget {
         title: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 15),
+              padding: const EdgeInsets.only(right: 5),
               child: Text(
                 date,
                 style: const TextStyle(
@@ -43,12 +46,21 @@ class EventItem extends StatelessWidget {
                 ),
               ),
             ),
-            isImportant ? 
-            Row(children: const [
-              Icon(Icons.notification_important, color: Colors.red, size: 18,),
-              Text("Important")
-            ],)
-            : const Text(""),
+            Text(time),
+            const SizedBox(
+              width: 15,
+            ),
+            for (var _group in groups)
+              Padding(
+                padding: const EdgeInsets.only(right: 0, left: 5),
+                child: Text(
+                  '#$_group',
+                  style: const TextStyle(
+                    color: Colors.blueAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
           ],
         ),
         subtitle: Column(
@@ -56,33 +68,31 @@ class EventItem extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 18
-                )
-                ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
-              child: Text(content),
+              child: Text(title, style: const TextStyle(fontSize: 18)),
             ),
             Row(
               children: <Widget>[
-                const Text("Tag:"),
-                for (var _group in groups)
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 10),
-                    child: Text(
-                      '#$_group',
-                      style: const TextStyle(
-                        color: Colors.blueAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
+                const Icon(Icons.location_on),
+                Text(location),
+                const SizedBox(
+                  width: 30,
+                ),
+                const Icon(Icons.group),
+                const SizedBox(
+                  width: 8,
+                ),
+                Text('$numberOfAttenders'),
+                SizedBox(width: 10,),
+                Text((() {
+                  if (status == 0) {
+                    return "Tentative";
+                  } else if (status == 1) {
+                    return  "Accept";
+                  }
+                  return "Denied";
+                })(),)
               ],
-            )
+            ),
           ],
         ),
       ),
