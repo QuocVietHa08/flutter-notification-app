@@ -1,5 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -62,51 +65,88 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void _loginInIdPlatform(BuildContext context) async {
+    const String loginUrl = "https://api.co-event.relipa.vn/api/v1/auth/custom";
+
+    var value = await launchUrl(
+      Uri.parse(loginUrl),
+      mode: LaunchMode.inAppWebView,
+    );
+    print(value);
+    if (value) {
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString('accessToken', "hello");
+      await closeInAppWebView();
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: const Text('Login Page'),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(top: 0.0, left: 40.0, right: 40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
               obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Password',
                 suffixIcon: IconButton(
-                  icon: Icon(
-                    _isPasswordVisible ? Icons.visibility_off : Icons.visibility
-                  ),
+                  icon: Icon(_isPasswordVisible
+                      ? Icons.visibility_off
+                      : Icons.visibility),
                   onPressed: _togglePasswordVisibility,
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _submitForm,
-                  child: Text('Submit'),
+                  child: const Text('Submit'),
+                ),
+                const SizedBox(
+                  width: 30,
                 ),
                 ElevatedButton(
                   onPressed: _clearForm,
-                  child: Text('Clear'),
+                  child: const Text('Clear'),
                 ),
               ],
             ),
+            SizedBox(
+              height: 10,
+            ),
+            InkWell(
+              // onTap: () => launchUrl(Uri.parse('https://api.co-event.relipa.vn/api/v1/auth/custom')),
+              onTap: () {
+                _loginInIdPlatform(context);
+              },
+              child: Text(
+                'Login with Id account',
+                style: TextStyle(
+                    decoration: TextDecoration.underline, color: Colors.blue),
+              ),
+            )
           ],
         ),
       ),
