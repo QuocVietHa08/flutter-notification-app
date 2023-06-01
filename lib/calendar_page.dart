@@ -1,3 +1,4 @@
+import 'package:demo_app/event_page.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_view/calendar_view.dart';
 import 'package:demo_app/common/layout/custom_footer_bar.dart';
@@ -37,10 +38,10 @@ class CalendarPage extends StatelessWidget {
         },
         minMonth: DateTime(1990),
         maxMonth: DateTime(2050),
-        cellAspectRatio: 1.3,
+        // cellAspectRatio: 1.3,
         onPageChange: (date, pageIndex) => print("$date, $pageIndex"),
         onCellTap: (events, date) {
-          print(date);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage()));
         },
         startDay: WeekDays.sunday,
         onEventTap: (event, date) => print("checking 1"),

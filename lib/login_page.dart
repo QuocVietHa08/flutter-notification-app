@@ -72,12 +72,8 @@ class _LoginPageState extends State<LoginPage> {
       Uri.parse(loginUrl),
       mode: LaunchMode.inAppWebView,
     );
-    print(value);
     if (value) {
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // prefs.setString('accessToken', "hello");
       await closeInAppWebView();
-      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
@@ -89,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Login Page'),
       ),
       body: Container(
@@ -134,10 +131,9 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             InkWell(
-              // onTap: () => launchUrl(Uri.parse('https://api.co-event.relipa.vn/api/v1/auth/custom')),
               onTap: () {
                 _loginInIdPlatform(context);
               },

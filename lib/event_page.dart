@@ -85,36 +85,25 @@ class _EventPageState extends State<EventPage> {
             )
           else
             Container(
-              height: 200,
+              // height: 200,
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
                 padding: const EdgeInsets.all(8),
                 itemCount: eventRes.length,
                 itemBuilder: (BuildContext context, int index) {
                   final data = eventRes[index];
-                  var date = DateTime.parse(data['date']);
-                  String dateFormat = DateFormat('yyyy-MM-dd').format(date);
-                  var arrayGroups = data['tags']
-                      .substring(0, data['tags'].length - 1)
-                      .split(',');
-                  var arrayAttenders = data['attenders']
-                      .substring(0, data['attenders'].length - 1)
-                      .split(',');
-
-                  var time = data['time'];
-                  var startTime = jsonDecode(time)['startTime'];
-                  var endTime = jsonDecode(time)['endTime'];
-
+                 
                   return EventItem(
                     id: data['id'] ?? 0,
                     title: data['title'] ?? '',
-                    date: dateFormat,
-                    time: '$startTime - $endTime',
-                    status: 0,
-                    groups: arrayGroups,
-                    attenders: arrayAttenders,
+                    date: data['date'] ?? '',
+                    time: data['time'] ?? '',
+                    status: data['status_id'] ?? '',
+                    groups: data['tags'] ??  '',
+                    attenders: data['attenders'] ?? '',
                     location: 'Song Da Towel',
-                    isImportant: data['isImportant'] == 1 ? true : false,
+                    // isImportant: data['isImportant'],
+                    isImportant: 1,
                     content: data['content'] ?? '',
                     deleteItem: _deleteEventItem,
                   );

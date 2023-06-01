@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './event_item_detail.dart';
 
 class EventItem extends StatelessWidget {
@@ -7,9 +10,9 @@ class EventItem extends StatelessWidget {
   final String location;
   final String date;
   final String time;
-  final List<String> groups;
-  final bool isImportant;
-  final List<String> attenders;
+  final String groups;
+  final int isImportant;
+  final String attenders;
   final int status;
   final int id;
   final Function(String) deleteItem;
@@ -31,7 +34,16 @@ class EventItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfAttenders = attenders.length;
+    final arrayAttenders =
+        attenders.substring(0, attenders.length - 1).split(',');
+
+    final arrayGroups = groups
+                      .substring(0, groups.length - 1)
+                      .split(',');
+    final numberOfAttenders = arrayAttenders.length;
+    final startTime = jsonDecode(time)['startTime'];
+    final endTime = jsonDecode(time)['endTime'];
+    final dateFormat = DateFormat('yyyy-MM-dd').format(DateTime.parse(date));
 
     return Card(
       child: ListTile(
@@ -48,7 +60,8 @@ class EventItem extends StatelessWidget {
                         groups: groups,
                         title: title,
                         location: location,
-                        attenders: groups,
+                        attenders: attenders,
+                        status: status,
                         // attenders: ['1', '2'],
                       )));
         },
@@ -57,7 +70,7 @@ class EventItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 5),
               child: Text(
-                date,
+                dateFormat,
                 style: const TextStyle(
                   decoration: TextDecoration.underline,
                   color: Colors.blueAccent,
@@ -65,21 +78,11 @@ class EventItem extends StatelessWidget {
                 ),
               ),
             ),
-            Text(time),
+            Text('$startTime-$endTime'),
             const SizedBox(
               width: 15,
             ),
-            // for (var _group in groups)
-            //   Padding(
-            //     padding: const EdgeInsets.only(right: 0, left: 5),
-            //     child: Text(
-            //       '#$_group',
-            //       style: const TextStyle(
-            //         color: Colors.blueAccent,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //   ),
+          
             const Spacer(),
             InkWell(
               onTap: () {
@@ -103,11 +106,13 @@ class EventItem extends StatelessWidget {
               padding: const EdgeInsets.only(top: 5),
               child: Text(title, style: const TextStyle(fontSize: 18)),
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 7,
+            ),
             Row(
               children: [
-                const Text("Tags"),
-                for (var _group in groups)
+                const Text("Tags:"),
+                for (var _group in arrayGroups)
                   Padding(
                     padding: const EdgeInsets.only(right: 0, left: 5),
                     child: Text(
@@ -120,7 +125,9 @@ class EventItem extends StatelessWidget {
                   ),
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 7,
+            ),
             Row(
               children: <Widget>[
                 const Icon(Icons.location_on),
@@ -149,8 +156,8 @@ class EventItem extends StatelessWidget {
                       color: status == 1
                           ? Colors.green
                           : status == 0
-                              ? Colors.red
-                              : Colors.black),
+                              ? Colors.black
+                              : Colors.red),
                 )
               ],
             ),

@@ -51,7 +51,9 @@ class NotificationItemDetail extends StatelessWidget {
                 'Nội dung:',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              Text(content),
+              Flexible(
+                child: Text(content),
+              )
             ],
           ),
           SizedBox(

@@ -1,3 +1,4 @@
+import 'package:demo_app/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +9,9 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  final TextEditingController _nameAccount = TextEditingController();
+  late final TextEditingController _nameAccount;
+  late final TextEditingController _emailAccount;
+
   final _formKey = GlobalKey<FormState>();
   String? accessToken = '';
   bool isLoading = false;
@@ -38,7 +41,9 @@ class _SettingPageState extends State<SettingPage> {
   @override
   void initState() {
     super.initState();
-    _fetchUserInfo();;
+      _nameAccount = TextEditingController(text: "Admin");
+      _emailAccount= TextEditingController(text: "admin@admin.com");
+    _fetchUserInfo();
   }
 
   @override
@@ -52,19 +57,22 @@ class _SettingPageState extends State<SettingPage> {
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // CircleAvatar(
-              //   radius: 50,
-              //   // backgroundImage: AssetImage('assets/avatar.png'),
-              // ),
-              // SizedBox(height: 20),
+              SizedBox(height: 50,),
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage("https://flutterx.com/thumbnails/artifact-2096.png"),
+                // backgroundImage: AssetImage('assets/avatar.png'),
+              ),
+              SizedBox(height: 20),
               Text(
-                'User Name',
+                'User Info',
                 style: TextStyle(fontSize: 24),
               ),
               TextFormField(
                   controller: _nameAccount,
+                  // initialValue: "Admin",
                   decoration: const InputDecoration(
                     label: Text("Tên"),
                     icon: Icon(Icons.person),
@@ -77,7 +85,7 @@ class _SettingPageState extends State<SettingPage> {
                     return null;
                   }),
               TextFormField(
-                  controller: _nameAccount,
+                  controller: _emailAccount,
                   decoration: const InputDecoration(
                     label: Text("Email"),
                     icon: Icon(Icons.email),
@@ -89,18 +97,19 @@ class _SettingPageState extends State<SettingPage> {
 
                     return null;
                   }),
-              TextFormField(
-                  controller: _nameAccount,
-                  decoration: const InputDecoration(
-                    label: Text("Ngày sinh"),
-                    icon: Icon(Icons.date_range),
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Xin hãy nhập ngày sinh';
-                    }
-                    return null;
-                  }),
+              // TextFormField(
+              //     controller: _nameAccount,
+              //     // initialValue: "01/01/1990",
+              //     decoration: const InputDecoration(
+              //       label: Text("Ngày sinh"),
+              //       icon: Icon(Icons.date_range),
+              //     ),
+              //     validator: (value) {
+              //       if (value!.isEmpty) {
+              //         return 'Xin hãy nhập ngày sinh';
+              //       }
+              //       return null;
+              //     }),
             ],
           ),
         ),
@@ -111,7 +120,12 @@ class _SettingPageState extends State<SettingPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
               child: const Text('Đăng xuất'),
             ),
           ],
