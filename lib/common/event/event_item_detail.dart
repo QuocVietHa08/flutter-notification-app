@@ -69,7 +69,7 @@ class EventItemDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Noi dung thong bao"),
+        title: const Text("Event detail"),
       ),
       body: Container(
           child: Padding(
@@ -78,7 +78,7 @@ class EventItemDetail extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Tiêu đề:',
+                'Title: ',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -94,7 +94,7 @@ class EventItemDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Nội dung:',
+                'Content: ',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -114,11 +114,11 @@ class EventItemDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Thời gian: ',
+                'Time: ',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               Flexible(child: 
-              Text('Ngày: $dateFormat, Giờ: $startTime - $endTime'),),
+              Text('Date: $dateFormat, Time: $startTime - $endTime'),),
             ],
           ),
           const SizedBox(

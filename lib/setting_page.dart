@@ -50,7 +50,7 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cài đặt"),
+        title: Text("Setting"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -79,7 +79,7 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Xin hãy nhập tên';
+                      return 'Please enter your name';
                     }
 
                     return null;
@@ -92,7 +92,7 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Xin hãy nhập email';
+                      return 'Please enter your email';
                     }
 
                     return null;
@@ -126,7 +126,7 @@ class _SettingPageState extends State<SettingPage> {
                   MaterialPageRoute(builder: (context) => LoginPage()),
                 );
               },
-              child: const Text('Đăng xuất'),
+              child: const Text('Log out'),
             ),
           ],
         ),

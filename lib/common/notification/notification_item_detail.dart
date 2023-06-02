@@ -26,7 +26,7 @@ class NotificationItemDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Noi dung thong bao"),
+        title: const Text("Detail Notification"),
       ),
       body: Container(
           child: Padding(
@@ -35,7 +35,7 @@ class NotificationItemDetail extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Tiêu đề:',
+                'Title:',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               Text(title),
@@ -48,7 +48,7 @@ class NotificationItemDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Nội dung:',
+                'Content:',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
               Flexible(
@@ -63,10 +63,10 @@ class NotificationItemDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Thời gian: ',
+                'Time: ',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              Text('Ngày: $date, Giờ: $time'),
+              Text('Date: $date, Time: $time'),
             ],
           ),
           SizedBox(

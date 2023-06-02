@@ -65,7 +65,8 @@ class _EventPageState extends State<EventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Danh sách sự kiện"),
+        // automaticallyImplyLeading: false,
+        title: const Text("Event Page"),
         actions: [
           IconButton(
               onPressed: () {
@@ -81,7 +82,7 @@ class _EventPageState extends State<EventPage> {
         children: <Widget>[
           if (eventRes.isEmpty)
             const Center(
-              child: Text("Không có thông báo!!"),
+              child: Text("Empty !!"),
             )
           else
             Container(

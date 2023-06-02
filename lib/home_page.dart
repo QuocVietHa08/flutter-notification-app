@@ -113,14 +113,14 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Ứng dụng thông báo"),
+        title: const Text("Notification App"),
       ),
       body: Container(
         child: Stack(
         children: <Widget>[
           if (notificationRes.isEmpty)
             const Center(
-              child: Text("Không có thông báo!!"),
+              child: Text("Empty !!"),
             )
           else
             ListView.builder(

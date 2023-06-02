@@ -1,3 +1,4 @@
+import 'package:demo_app/home_page.dart';
 import 'package:demo_app/notification_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_mentions/flutter_mentions.dart';
 import 'package:flutter_quill/extensions.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:page_transition/page_transition.dart';
 
 class NotificationCreate extends StatefulWidget {
   @override
@@ -110,13 +112,14 @@ class _NotificationCreateState extends State<NotificationCreate> {
       _mentionsGroup = '';
       _textEditorController = quill.QuillController.basic();
     });
+    // Navigator.push(context, PageTransition(child: NotificationPage(), type: PageTransitionType.leftToRight, isIos: true, duration: Duration(milliseconds: 400)));
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Tạo thông báo"),
+        title: const Text("Create Notification"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -128,10 +131,10 @@ class _NotificationCreateState extends State<NotificationCreate> {
                 TextFormField(
                   controller: _input1Controller,
                   decoration: const InputDecoration(
-                      label: Text("Tiêu đề"), icon: Icon(Icons.send)),
+                      label: Text("Title"), icon: Icon(Icons.send)),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Xin hãy nhập tiêu đề';
+                      return 'Please enter title';
                     }
 
                     return null;
@@ -160,18 +163,18 @@ class _NotificationCreateState extends State<NotificationCreate> {
                   ],
                 ),
                 SwitchListTile(
-                  title: const Text("Quan trọng"),
+                  title: const Text("Important"),
                   value: _switchValue,
                   onChanged: checkboxCallback,
                   contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
                 ),
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                  title: const Text('Thời gian '),
+                  title: const Text('Time'),
                   // ignore: unnecessary_null_comparison
                   subtitle: Text(_selectedDate != null && _selectedTime != null
                       ? '${dateValueFormat.format(_selectedDate ?? DateTime.now())} ${_selectedTime!.format(context)}'
-                      : 'Không có ngày được chọn'),
+                      : 'No day choose'),
                   onTap: () {
                     showCupertinoModalPopup(
                         context: context,
@@ -231,7 +234,7 @@ class _NotificationCreateState extends State<NotificationCreate> {
                   height: 16,
                 ),
                 const Text(
-                  "Nội dung",
+                  "Content",
                   style: TextStyle(fontSize: 16),
                 ),
                 quill.QuillToolbar.basic(
@@ -250,7 +253,7 @@ class _NotificationCreateState extends State<NotificationCreate> {
                       padding: EdgeInsets.zero,
                       focusNode: FocusNode(),
                       scrollController: ScrollController(),
-                      placeholder: "Nhập nội dung thông báo",
+                      placeholder: "Enter notification content",
                     ),
                   ),
                 ),

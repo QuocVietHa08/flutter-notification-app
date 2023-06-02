@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import './common//notification/notification_item.dart';
 import './common//notification//notification_create.dart';
 import 'package:http/http.dart' as http;
+import 'package:page_transition/page_transition.dart';
 
 class NotificationPage extends StatefulWidget {
   @override
@@ -70,6 +71,7 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         title: const Text("Thông báo"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),

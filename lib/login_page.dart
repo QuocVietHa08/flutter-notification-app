@@ -16,9 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
 
   void _submitForm() {
-    // Perform your login logic here
-    // You can access the entered values using _usernameController.text and _emailController.text
-    // For simplicity, we'll assume the login is successful
     String email = _emailController.text;
     String password = _passwordController.text;
 
@@ -84,15 +81,19 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Login Page'),
-      ),
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   title: const Text('Login Page'),
+      // ),
       body: Container(
         padding: const EdgeInsets.only(top: 0.0, left: 40.0, right: 40.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset('assets/logo.png', height: 120,),
+            const SizedBox(height: 20,),
+            const Text('Relipa Notification App', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+            const SizedBox(height: 20,),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(
@@ -113,35 +114,73 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
+            const SizedBox(height: 30.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  child: const Text('Submit'),
-                ),
-                const SizedBox(
-                  width: 30,
-                ),
-                ElevatedButton(
-                  onPressed: _clearForm,
-                  child: const Text('Clear'),
-                ),
+                  Expanded(
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.blue),
+                      child: Center(
+                        // child: GestureDetector(
+                        //   onTap: () {
+                        //     _submitForm();
+                        //   },
+                        //   child: const Text(
+                        //     "Submit",
+                        //     style: TextStyle(
+                        //         color: Colors.white,
+                        //         fontWeight: FontWeight.bold),
+                        //   ),
+                        // ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            _submitForm();
+                          },
+                          child: const Text('Submit'),
+                        ),
+                      ),
+                    ),
+                  ),
+               
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            InkWell(
-              onTap: () {
-                _loginInIdPlatform(context);
-              },
-              child: Text(
-                'Login with Id account',
-                style: TextStyle(
-                    decoration: TextDecoration.underline, color: Colors.blue),
-              ),
+            const Text(
+              "Continue with Id account",
+              style: TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.blue),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          _loginInIdPlatform(context);
+                        },
+                        child: const Text(
+                          "Id Account",
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             )
           ],
         ),

@@ -131,7 +131,7 @@ class _EventCreateState extends State<EventCreate> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
-        title: const Text("Tạo sự kiện"),
+        title: const Text("Create event"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -157,7 +157,7 @@ class _EventCreateState extends State<EventCreate> {
                     _handleMentionPersonAdd(p0);
                   },
                   decoration: const InputDecoration(
-                    label: Text("Người tham gia"),
+                    label: Text("Person"),
                     icon: Icon(Icons.person),
                   ),
                   mentions: [
@@ -177,7 +177,7 @@ class _EventCreateState extends State<EventCreate> {
                     _handleMentionGroupAdd(p0);
                   },
                   decoration: const InputDecoration(
-                    label: Text("Nhóm người tham gia"),
+                    label: Text("Groups"),
                     icon: Icon(Icons.group),
                   ),
                   mentions: [
@@ -196,11 +196,11 @@ class _EventCreateState extends State<EventCreate> {
                 ),
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 0.0, right: 0.0),
-                  title: const Text('Ngày tổ chức sự kiện'),
+                  title: const Text('Day'),
                   // ignore: unnecessary_null_comparison
                   subtitle: Text(_selectedDate != null
                       ? '${dateValueFormat.format(_selectedDate ?? DateTime.now())} '
-                      : 'Không có ngày được chọn'),
+                      : 'No day to choose'),
                   onTap: () {
                     // showDatePicker(
                     //   context: context,
@@ -242,7 +242,7 @@ class _EventCreateState extends State<EventCreate> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Thời gian sự kiện",
+                    const Text("Time",
                         style: TextStyle(fontSize: 16)),
                     Row(
                       children: <Widget>[
@@ -288,7 +288,7 @@ class _EventCreateState extends State<EventCreate> {
                                 });
                               }
                             },
-                            child: const Text("Chọn")),
+                            child: const Text("Click")),
                         // const SizedBox(
                         //   width: 50,
                         // ),
@@ -303,7 +303,7 @@ class _EventCreateState extends State<EventCreate> {
                         const SizedBox(
                           width: 10,
                         ),
-                        const Text("Cả ngày"),
+                        const Text("All day"),
                       ],
                     ),
                     // if (_endTime.isNotEmpty && _startTime.isNotEmpty )
@@ -311,12 +311,12 @@ class _EventCreateState extends State<EventCreate> {
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(top: 5, bottom: 5),
-                          child: Text('Thời gian bắt đầu: $_startTime',
+                          child: Text('Time start: $_startTime',
                               style: const TextStyle(
                                 fontSize: 16,
                               )),
                         ),
-                        Text('Thời gian kết thúc: $_endTime',
+                        Text('Time end: $_endTime',
                             style: const TextStyle(fontSize: 16)),
                       ],
                     )
@@ -325,10 +325,10 @@ class _EventCreateState extends State<EventCreate> {
                 TextFormField(
                   controller: _locationController,
                   decoration: const InputDecoration(
-                      label: Text("Địa điểm"), icon: Icon(Icons.location_city)),
+                      label: Text("Location"), icon: Icon(Icons.location_city)),
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Hãy nhập địa điểm';
+                      return 'Please enter location';
                     }
                     return null;
                   },
@@ -337,7 +337,7 @@ class _EventCreateState extends State<EventCreate> {
                   height: 16,
                 ),
                 const Text(
-                  "Nội dung",
+                  "Content",
                   style: TextStyle(fontSize: 16),
                 ),
                 quill.QuillToolbar.basic(
@@ -370,7 +370,7 @@ class _EventCreateState extends State<EventCreate> {
                     children: [
                       ElevatedButton(
                         onPressed: _submitForm,
-                        child: const Text('Tạo'),
+                        child: const Text('Create'),
                       ),
                       const SizedBox(
                         width: 50,
