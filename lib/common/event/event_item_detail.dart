@@ -117,7 +117,8 @@ class EventItemDetail extends StatelessWidget {
                 'Thời gian: ',
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              Text('Ngày: $dateFormat, Giờ: $startTime - $endTime'),
+              Flexible(child: 
+              Text('Ngày: $dateFormat, Giờ: $startTime - $endTime'),),
             ],
           ),
           const SizedBox(

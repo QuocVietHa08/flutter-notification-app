@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    if (email == 'abc@gmail.com' && password == 'abc@123') {
+    if (email == 'admin@gmail.com' && password == 'abc@123') {
       // Show success message using SnackBar
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
