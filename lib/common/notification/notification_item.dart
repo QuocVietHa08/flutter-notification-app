@@ -27,7 +27,7 @@ class NotificationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: ListTile(
           onTap: () {
             Navigator.push(
@@ -45,50 +45,59 @@ class NotificationItem extends StatelessWidget {
             );
           },
           title: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 0),
-                child: Row(children: [
-                  Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Text(
-                        date,
-                        style: const TextStyle(
-                          decoration: TextDecoration.underline,
-                          color: Colors.blueAccent,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )),
-                  Text(time),
-                ]),
-              ),
-              const Spacer(),
-              isImportant
-                  ? const Row(
-                      children: [
-                        Icon(
-                          Icons.notification_important,
-                          color: Colors.red,
-                          size: 18,
-                        ),
-                        Text("Important")
-                      ],
-                    )
-                  : const Text(""),
-              Spacer(),
-              InkWell(
-                onTap: () {
-                  deleteItem(id.toString());
-                },
-                child: const Padding(
-                  padding: EdgeInsets.only(left: 10),
-                  child: Icon(
-                    Icons.delete,
-                    size: 17,
-                    color: Colors.red,
-                  ),
+              Flexible(
+                flex: 3,
+                child:  Padding(
+                  padding: const EdgeInsets.only(right: 0),
+                  child: Row(children: [
+                    Expanded(
+                        // padding: const EdgeInsets.only(right: 0),
+                        child: Text(
+                          title,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            // fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )),
+                  ]),
                 ),
-              )
+              ),
+              Expanded(
+
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [Text(date)],),
+              ),
+              // const Spacer(),
+              // isImportant
+              //     ? const Row(
+              //         children: [
+              //           Icon(
+              //             Icons.notification_important,
+              //             color: Colors.red,
+              //             size: 18,
+              //           ),
+              //           Text("Important")
+              //         ],
+              //       )
+              //     : const Text(""),
+              // Spacer(),
+              // InkWell(
+              //   onTap: () {
+              //     deleteItem(id.toString());
+              //   },
+              //   child: const Padding(
+              //     padding: EdgeInsets.only(left: 10),
+              //     child: Icon(
+              //       Icons.delete,
+              //       size: 17,
+              //       color: Colors.red,
+              //     ),
+              //   ),
+              // )
             ],
           ),
           subtitle: Column(
@@ -96,15 +105,15 @@ class NotificationItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 5),
-                child: Text(title, style: const TextStyle(fontSize: 18)),
+                child: Text(content,maxLines: 2, style: const TextStyle(fontSize: 18)),
               ),
               SizedBox(height: 10),
-              Row(
-                children: [
-                  Text('Time:', style: TextStyle(fontWeight: FontWeight.bold),),
-                  Text('$time'),
-                ],
-              )
+              // Row(
+              //   children: [
+              //     Text('Time:', style: TextStyle(fontWeight: FontWeight.bold),),
+              //     Text('$time'),
+              //   ],
+              // )
               // Padding(
               //   padding: const EdgeInsets.only(top: 10, bottom: 10),
               //   child: Text(content),

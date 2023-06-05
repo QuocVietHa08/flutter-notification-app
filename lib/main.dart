@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Portal(
-      child:  GetMaterialApp(
-      // debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      child:  MaterialApp(
+      // home: SplashView(),
+      home: LoginPage(),
     ));
   }
 }

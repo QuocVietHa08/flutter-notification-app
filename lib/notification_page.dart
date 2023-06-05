@@ -107,10 +107,10 @@ class _NotificationPageState extends State<NotificationPage> {
                 itemBuilder: (BuildContext context, int index) {
                   final data = notificationRes[index];
                   var date = DateTime.parse(data['date']);
-                  String dateFormat = DateFormat('yyyy-MM-dd').format(date);
+                  String dateFormat = DateFormat.MMMMd().format(date);
                   var time = data['time'];
                   var arrayTags = data['tags'].substring(0, data['tags'].length - 1).split(',');
-
+                  // print(data);
                   return NotificationItem(
                     id: data['id'] ?? 0,
                     title: data['title'] ?? '',

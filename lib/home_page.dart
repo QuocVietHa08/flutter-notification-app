@@ -83,22 +83,22 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _deleteEventItem(_id) async {
-    setState(() {
-      isLoading = true;
-    });
-    var url = Uri.parse("https://api.co-event.relipa.vn/api/v1/event/$_id");
-    final res = await http.delete(url);
+  // void _deleteEventItem(_id) async {
+  //   setState(() {
+  //     isLoading = true;
+  //   });
+  //   var url = Uri.parse("https://api.co-event.relipa.vn/api/v1/event/$_id");
+  //   final res = await http.delete(url);
 
-    if (res.statusCode == 204) {
-      fetchData();
-    } else {
-      print('Request failed width status: ${res.statusCode}');
-      setState(() {
-        isLoading = false;
-      });
-    }
-  }
+  //   if (res.statusCode == 204) {
+  //     fetchData();
+  //   } else {
+  //     print('Request failed width status: ${res.statusCode}');
+  //     setState(() {
+  //       isLoading = false;
+  //     });
+  //   }
+  // }
 
   @override
   void initState() {
@@ -130,22 +130,43 @@ class _HomePageState extends State<HomePage> {
                 itemBuilder: (BuildContext context, int index) {
                   final data = notificationRes[index];
                   var date = DateTime.parse(data['date']);
-                  String dateFormat = DateFormat('yyyy-MM-dd').format(date);
+                  String dateFormat = DateFormat('MM/dd').format(date);
                   var time = data['time'];
                   var arrayTags = data['tags']
                       .substring(0, data['tags'].length - 1)
                       .split(',');
 
-                  return NotificationItem(
-                    id: data['id'] ?? 0,
-                    title: data['title'] ?? '',
-                    date: dateFormat,
-                    time: time,
-                    isImportant: data['isImportant'] == 1 ? true : false,
-                    tags: arrayTags,
-                    content: data['content'] ?? '',
-                    deleteItem: _deleteNotificationitem,
-                  );
+                  return Dismissible(
+                    onDismissed: (direction) {
+                      _deleteNotificationitem(data['id']);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("${data['title']} dismissed")));
+                    },
+                    key: Key(index.toString()),
+                    background: Container(
+                      color: Colors.grey, 
+                      child: const Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Icon(Icons.delete, color: Colors.white),
+                            Text('Delete', style: TextStyle(color: Colors.white)),
+                          ],
+                        ),
+                      ) 
+                    ),
+                    child: 
+                    NotificationItem(
+                      id: data['id'] ?? 0,
+                      title: data['title'] ?? '',
+                      date: dateFormat,
+                      time: time,
+                      isImportant: data['isImportant'] == 1 ? true : false,
+                      tags: arrayTags,
+                      content: data['content'] ?? '',
+                      deleteItem: _deleteNotificationitem,
+                    ));
                 }),
           // if (eventRes.isEmpty)
           //   const Center(

@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     if (email == 'admin@gmail.com' && password == 'abc@123') {
       // Show success message using SnackBar
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Success! Logged in'),
         ),
       );
@@ -125,27 +125,20 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(50),
                           color: Colors.blue),
                       child: Center(
-                        // child: GestureDetector(
-                        //   onTap: () {
-                        //     _submitForm();
-                        //   },
-                        //   child: const Text(
-                        //     "Submit",
-                        //     style: TextStyle(
-                        //         color: Colors.white,
-                        //         fontWeight: FontWeight.bold),
-                        //   ),
-                        // ),
-                        child: ElevatedButton(
+                       child: ElevatedButton(
                           onPressed: () {
                             _submitForm();
                           },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                            side: const BorderSide(color: Colors.transparent, width: 0),
+                            shadowColor: Colors.transparent 
+                          ),
                           child: const Text('Submit'),
                         ),
                       ),
                     ),
-                  ),
-               
+                  ),               
               ],
             ),
             const SizedBox(
@@ -167,10 +160,15 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(50),
                         color: Colors.blue),
                     child: Center(
-                      child: GestureDetector(
-                        onTap: () {
+                      child: ElevatedButton(
+                        onPressed: () {
                           _loginInIdPlatform(context);
                         },
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                          side: const BorderSide(color: Colors.transparent, width: 0),
+                          shadowColor: Colors.transparent 
+                        ),
                         child: const Text(
                           "Id Account",
                           style: TextStyle(
