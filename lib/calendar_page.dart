@@ -41,7 +41,7 @@ class CalendarPage extends StatelessWidget {
         // cellAspectRatio: 1.3,
         onPageChange: (date, pageIndex) => print("$date, $pageIndex"),
         onCellTap: (events, date) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => EventPage(dateSearch: date.toString())));
         },
         startDay: WeekDays.sunday,
         onEventTap: (event, date) => print("checking 1"),

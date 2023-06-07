@@ -49,55 +49,26 @@ class NotificationItem extends StatelessWidget {
             children: [
               Flexible(
                 flex: 3,
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.only(right: 0),
                   child: Row(children: [
                     Expanded(
-                        // padding: const EdgeInsets.only(right: 0),
                         child: Text(
-                          title,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            // fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        )),
+                      title,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
                   ]),
                 ),
               ),
               Expanded(
-
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [Text(date)],),
+                  children: [Text(date)],
+                ),
               ),
-              // const Spacer(),
-              // isImportant
-              //     ? const Row(
-              //         children: [
-              //           Icon(
-              //             Icons.notification_important,
-              //             color: Colors.red,
-              //             size: 18,
-              //           ),
-              //           Text("Important")
-              //         ],
-              //       )
-              //     : const Text(""),
-              // Spacer(),
-              // InkWell(
-              //   onTap: () {
-              //     deleteItem(id.toString());
-              //   },
-              //   child: const Padding(
-              //     padding: EdgeInsets.only(left: 10),
-              //     child: Icon(
-              //       Icons.delete,
-              //       size: 17,
-              //       color: Colors.red,
-              //     ),
-              //   ),
-              // )
             ],
           ),
           subtitle: Column(
@@ -105,9 +76,10 @@ class NotificationItem extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 5),
-                child: Text(content,maxLines: 2, style: const TextStyle(fontSize: 18)),
+                child: Text(content,
+                    maxLines: 2, style: const TextStyle(fontSize: 18)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               // Row(
               //   children: [
               //     Text('Time:', style: TextStyle(fontWeight: FontWeight.bold),),

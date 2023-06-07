@@ -7,6 +7,9 @@ import 'package:demo_app/common/event/event_create.dart';
 import 'package:http/http.dart' as http;
 
 class EventPage extends StatefulWidget {
+  final String dateSearch;
+
+  const EventPage({this.dateSearch = ''});
   @override
   State<EventPage> createState() => _EventPageState();
 }
@@ -16,7 +19,11 @@ class _EventPageState extends State<EventPage> {
   bool isLoading = false;
 
   void fetchData() async {
-    var url = Uri.parse("https://api.co-event.relipa.vn/api/v1/event");
+    final queryPrarms = {
+      'date': widget.dateSearch.toString(),
+    };
+    var url = Uri.https("api.co-event.relipa.vn", "/api/v1/event", queryPrarms);
+
     setState(() {
       isLoading = true;
     });
@@ -93,14 +100,14 @@ class _EventPageState extends State<EventPage> {
                 itemCount: eventRes.length,
                 itemBuilder: (BuildContext context, int index) {
                   final data = eventRes[index];
-                 
+
                   return EventItem(
                     id: data['id'] ?? 0,
                     title: data['title'] ?? '',
                     date: data['date'] ?? '',
                     time: data['time'] ?? '',
                     status: data['status_id'] ?? '',
-                    groups: data['tags'] ??  '',
+                    groups: data['tags'] ?? '',
                     attenders: data['attenders'] ?? '',
                     location: 'Song Da Towel',
                     // isImportant: data['isImportant'],

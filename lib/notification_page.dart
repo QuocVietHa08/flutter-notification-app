@@ -72,7 +72,7 @@ class _NotificationPageState extends State<NotificationPage> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
-        title: const Text("Thông báo"),
+        title: const Text("Notification Page"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -97,7 +97,7 @@ class _NotificationPageState extends State<NotificationPage> {
         children: <Widget>[
           if (notificationRes.isEmpty)
             const Center(
-              child: Text("Không có thông báo!!"),
+              child: Text("Empty!!"),
             )
           else
             ListView.builder(
@@ -107,7 +107,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 itemBuilder: (BuildContext context, int index) {
                   final data = notificationRes[index];
                   var date = DateTime.parse(data['date']);
-                  String dateFormat = DateFormat.MMMMd().format(date);
+                  String dateFormat = DateFormat('MM/dd').format(date);
                   var time = data['time'];
                   var arrayTags = data['tags'].substring(0, data['tags'].length - 1).split(',');
                   // print(data);

@@ -20,8 +20,8 @@ class _NotificationCreateState extends State<NotificationCreate> {
   final TextEditingController _input1Controller = TextEditingController();
   final TextEditingController _input2Controller = TextEditingController();
   late bool _switchValue = false;
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
+  DateTime? _selectedDate = DateTime.now();
+  TimeOfDay? _selectedTime = TimeOfDay.now();
   var dateValueFormat = DateFormat('yyyy/MM/dd');
   quill.QuillController _textEditorController = quill.QuillController.basic();
 
@@ -189,7 +189,6 @@ class _NotificationCreateState extends State<NotificationCreate> {
                                         mode: CupertinoDatePickerMode.dateAndTime,
                                         initialDateTime: DateTime.now(),
                                         onDateTimeChanged: (DateTime val) {
-                                          print((val));
                                           setState(() {
                                             _selectedDate = DateTime(
                                                 val.year, val.month, val.day);
@@ -267,7 +266,7 @@ class _NotificationCreateState extends State<NotificationCreate> {
                     children: [
                       ElevatedButton(
                         onPressed: _submitForm,
-                        child: const Text('Tạo'),
+                        child: const Text('Create'),
                       ),
                       const SizedBox(
                         width: 50,
